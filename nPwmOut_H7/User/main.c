@@ -52,32 +52,32 @@ int main(void)
         key = key_scan(0);
         if (key == KEY0_PRES)
         {
-						HAL_TIM_PWM_Start(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
-						HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);
-						HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
-						atim_timx_chy_npwm_set(2);              /* PA8 输出5个PWM */
+				HAL_TIM_PWM_Start(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
+				HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);
+				HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
+				atim_timx_chy_npwm_set(2);              /* PA8 输出5个PWM */
         }
-				else if( key == KEY1_PRES)
+		else if( key == KEY1_PRES)
+		{
+				HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);	
+				HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
+				HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
+				atim_tim15_chy_npwm_set(3);				/* PA2 输出5个PWM 正点原子开发板上有上拉电阻对其电平有影响 */                                                                                                                                
+		}
+		else if( key == KEY2_PRES )
+		{
+				HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
+				HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
+				HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);
+				atim_tim15_chy_npwm_set(4);				/* PA3 输出5个PWM */
+		}
+		/* 提示主程序正在运行 */
+				if (++t == 20)
 				{
-						HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);	
-						HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
-						HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
-						atim_tim15_chy_npwm_set(3);				/* PA2 输出5个PWM 正点原子开发板上有上拉电阻对其电平有影响 */                                                                                                                                
+						t = 0;
+						LED0_TOGGLE();
 				}
-				else if( key == KEY2_PRES )
-				{
-						HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
-						HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
-						HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);
-						atim_tim15_chy_npwm_set(4);				/* PA3 输出5个PWM */
-				}
-				/* 提示主程序正在运行 */
-						if (++t == 20)
-						{
-								t = 0;
-								LED0_TOGGLE();
-						}
-						
-						delay_ms(200);
-				}
+				
+				delay_ms(200);
+		}
 }

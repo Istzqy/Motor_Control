@@ -92,22 +92,22 @@ void atim_timx_chy_npwm_init(uint16_t arr, uint16_t psc)
     timx_oc_init_struct.Pulse = (arr + 1) >> 1;                                                 	/* 占空比 */
     timx_oc_init_struct.OCPolarity = TIM_OCPOLARITY_HIGH;                                       	/* 有效电平 */
     HAL_TIM_PWM_ConfigChannel(&g_timx_npwm_handle, &timx_oc_init_struct, ATIM_TIMX_NPWM_CHY);   	/* 配置定时器PWM通道 */
-		HAL_TIM_PWM_ConfigChannel(&g_tim15_npwm_handle, &timx_oc_init_struct, ATIM_TIM15_NPWM_CH1);   /* 配置定时器PWM通道 */
-		HAL_TIM_PWM_ConfigChannel(&g_tim15_npwm_handle, &timx_oc_init_struct, ATIM_TIM15_NPWM_CH2);   /* 配置定时器PWM通道 */
+	HAL_TIM_PWM_ConfigChannel(&g_tim15_npwm_handle, &timx_oc_init_struct, ATIM_TIM15_NPWM_CH1);   /* 配置定时器PWM通道 */
+	HAL_TIM_PWM_ConfigChannel(&g_tim15_npwm_handle, &timx_oc_init_struct, ATIM_TIM15_NPWM_CH2);   /* 配置定时器PWM通道 */
     
     __HAL_TIM_ENABLE_IT(&g_timx_npwm_handle, TIM_IT_UPDATE);                                    /* 使能定时器更新中断 */
-		__HAL_TIM_ENABLE_IT(&g_tim15_npwm_handle, TIM_IT_UPDATE);                                    /* 使能定时器更新中断 */
-		HAL_TIM_PWM_Start(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);		
-		HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);	
-		HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);	
+	__HAL_TIM_ENABLE_IT(&g_tim15_npwm_handle, TIM_IT_UPDATE);                                    /* 使能定时器更新中断 */
+	HAL_TIM_PWM_Start(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);		
+	HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);	
+	HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);	
     
     /* 配置中断优先级并使能中断 */
     HAL_NVIC_SetPriority(ATIM_TIMX_NPWM_IRQn, 0, 1);
-		HAL_NVIC_SetPriority(ATIM_TIM15_NPWM_IRQn, 0, 2);
-		HAL_NVIC_SetPriority(ATIM_TIM15_NPWM_IRQn, 0, 2);
+	HAL_NVIC_SetPriority(ATIM_TIM15_NPWM_IRQn, 0, 2);
+	HAL_NVIC_SetPriority(ATIM_TIM15_NPWM_IRQn, 0, 2);
     HAL_NVIC_EnableIRQ(ATIM_TIMX_NPWM_IRQn);
-		HAL_NVIC_EnableIRQ(ATIM_TIM15_NPWM_IRQn);
-		HAL_NVIC_EnableIRQ(ATIM_TIM15_NPWM_IRQn);
+	HAL_NVIC_EnableIRQ(ATIM_TIM15_NPWM_IRQn);
+	HAL_NVIC_EnableIRQ(ATIM_TIM15_NPWM_IRQn);
 }
 
 /**
