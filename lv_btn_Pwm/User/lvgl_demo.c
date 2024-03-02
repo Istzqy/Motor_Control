@@ -170,7 +170,7 @@ void pwm_task(void *pvParameters)
 			*/
 			switch (Axis_Switch)
             {
-                case X_Axis:                                         
+                case (X_Axis_Right):                                         
                 {
 					LED1_TOGGLE();
 					HAL_TIM_PWM_Start(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
@@ -180,7 +180,17 @@ void pwm_task(void *pvParameters)
 					Axis_Switch = 0;
                     break;
                 }
-				case Y_Axis:
+				case (X_Axis_Left):                                         
+                {
+					LED1_TOGGLE();
+					HAL_TIM_PWM_Start(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
+					HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);
+					HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
+					atim_timx_chy_npwm_set(2);              /* PA8 输出5个PWM */
+					Axis_Switch = 0;
+                    break;
+                }
+				case Y_Axis_Right:
 				{
 					HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);	
 					HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
@@ -189,7 +199,25 @@ void pwm_task(void *pvParameters)
                     Axis_Switch = 0;
 					break;
 				}
-				case Z_Axis:
+				case Y_Axis_Left:
+				{
+					HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);	
+					HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
+					HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
+					atim_tim15_chy_npwm_set(3);				/* PA2 输出5个PWM 正点原子开发板上有上拉电阻对其电平有影响 */
+                    Axis_Switch = 0;
+					break;
+				}
+				case Z_Axis_Right:
+				{
+					HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
+					HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);
+					HAL_TIM_PWM_Stop(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH1);
+					atim_tim15_chy_npwm_set(4);				/* PA3 输出5个PWM */
+					Axis_Switch = 0;
+					break;
+				}
+				case Z_Axis_Left:
 				{
 					HAL_TIM_PWM_Start(&g_tim15_npwm_handle, ATIM_TIM15_NPWM_CH2);
 					HAL_TIM_PWM_Stop(&g_timx_npwm_handle, ATIM_TIMX_NPWM_CHY);

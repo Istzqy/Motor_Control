@@ -48,9 +48,12 @@
 #define ATIM_TIM15_NPWM_CHY_GPIO_CLK_ENABLE()    do { __HAL_RCC_GPIOA_CLK_ENABLE(); } while (0)
 
 /* ÷·œÚ«–ªª±Í÷æ */
-#define X_Axis	1
-#define Y_Axis	2
-#define	Z_Axis	3
+#define X_Axis_Right		1
+#define X_Axis_Left			2
+#define Y_Axis_Right		3
+#define Y_Axis_Left			4
+#define	Z_Axis_Right		5
+#define	Z_Axis_Left			6	
 
 //#define ATIM_TIMX_COMP                          TIM8
 //#define ATIM_TIMX_COMP_CLK_ENABLE()             do { __HAL_RCC_TIM8_CLK_ENABLE(); } while (0)
